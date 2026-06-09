@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import TaskCard from '../components/TaskCard';
+import { addTask } from '../utils/taskUtils';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ route, navigation }) {
   const [tasks, setTasks] = useState([
     {
       id: '1',
@@ -20,6 +21,14 @@ export default function HomeScreen({ navigation }) {
     }
   ]);
 
+  useEffect(() => {
+    if (route.params?.newTask) {
+      setTasks(currentTasks => addTask(currentTasks, route.params.newTask));
+      // Reset params so we don't add it again on re-render
+      navigation.setParams({ newTask: undefined });
+    }
+  }, [route.params?.newTask]);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -31,7 +40,7 @@ export default function HomeScreen({ navigation }) {
       />
       <View style={styles.buttonContainer}>
         <Button 
-          title="Tambah Tugas (Dummy)" 
+          title="Tambah Tugas" 
           onPress={() => navigation.navigate('Form')} 
         />
         <Button 
