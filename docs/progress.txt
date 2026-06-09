@@ -15,3 +15,4 @@ It is used to ensure the agent maintains context between iterations.
 [2026-06-09T15:39:00+07:00] - [#5] - Implemented DetailScreen navigation and UI with params data - Bypassed UI tests as per PRD.
 [2026-06-09T15:40:00+07:00] - [#6] - Implemented toggleTaskStatus in taskUtils with TDD and added status toggle button to TaskCard on HomeScreen - Bypassed UI tests as per PRD.
 [2026-06-09T15:42:00+07:00] - [#7] - Implemented deleteTask in taskUtils with TDD, added Hapus Tugas button to DetailScreen, and synced state in HomeScreen via route params - Bypassed UI tests as per PRD.
+[2026-06-09T15:44:00+07:00] - [#8] - Implemented filterTasksByStatus in taskUtils with TDD and added filter tabs in HomeScreen UI - Bypassed UI tests as per PRD.

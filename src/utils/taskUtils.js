@@ -26,8 +26,16 @@ function deleteTask(tasks, taskId) {
   return tasks.filter(task => task.id !== taskId);
 }
 
+function filterTasksByStatus(tasks, status) {
+  if (status === 'Semua') {
+    return tasks;
+  }
+  return tasks.filter(task => task.status === status);
+}
+
 module.exports = {
   addTask,
   toggleTaskStatus,
-  deleteTask
+  deleteTask,
+  filterTasksByStatus
 };

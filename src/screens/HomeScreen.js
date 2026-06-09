@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import TaskCard from '../components/TaskCard';
-import { addTask, toggleTaskStatus, deleteTask } from '../utils/taskUtils';
+import { addTask, toggleTaskStatus, deleteTask, filterTasksByStatus } from '../utils/taskUtils';
 
 export default function HomeScreen({ route, navigation }) {
+  const [activeFilter, setActiveFilter] = useState('Semua');
   const [tasks, setTasks] = useState([
     {
       id: '1',
@@ -38,8 +39,19 @@ export default function HomeScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.filterContainer}>
+        {['Semua', 'Belum', 'Selesai'].map(filter => (
+          <TouchableOpacity 
+            key={filter}
+            style={[styles.filterButton, activeFilter === filter && styles.filterButtonActive]}
+            onPress={() => setActiveFilter(filter)}
+          >
+            <Text style={[styles.filterText, activeFilter === filter && styles.filterTextActive]}>{filter}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
       <FlatList
-        data={tasks}
+        data={filterTasksByStatus(tasks, activeFilter)}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
         ListEmptyComponent={<Text style={styles.emptyText}>Belum ada tugas</Text>}
@@ -65,6 +77,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    padding: 16,
+    paddingBottom: 0,
+    gap: 8,
+  },
+  filterButton: {
+    flex: 1,
+    paddingVertical: 8,
+    alignItems: 'center',
+    backgroundColor: '#e0e0e0',
+    borderRadius: 8,
+  },
+  filterButtonActive: {
+    backgroundColor: '#007bff',
+  },
+  filterText: {
+    fontSize: 14,
+    color: '#555',
+    fontWeight: '500',
+  },
+  filterTextActive: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   listContainer: {
     padding: 16,

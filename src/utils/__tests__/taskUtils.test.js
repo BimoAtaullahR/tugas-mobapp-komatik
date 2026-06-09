@@ -1,4 +1,4 @@
-const { addTask, toggleTaskStatus, deleteTask } = require('../taskUtils');
+const { addTask, toggleTaskStatus, deleteTask, filterTasksByStatus } = require('../taskUtils');
 
 describe('taskUtils - addTask', () => {
   it('should add a new task to the array and return a new array', () => {
@@ -81,5 +81,32 @@ describe('taskUtils - deleteTask', () => {
     
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('1');
+  });
+});
+
+describe('taskUtils - filterTasksByStatus', () => {
+  const tasks = [
+    { id: '1', status: 'Belum' },
+    { id: '2', status: 'Selesai' },
+    { id: '3', status: 'Belum' }
+  ];
+
+  it('should return all tasks when status is "Semua"', () => {
+    const result = filterTasksByStatus(tasks, 'Semua');
+    expect(result).toHaveLength(3);
+    expect(result).toEqual(tasks);
+  });
+
+  it('should return only "Belum" tasks when status is "Belum"', () => {
+    const result = filterTasksByStatus(tasks, 'Belum');
+    expect(result).toHaveLength(2);
+    expect(result[0].id).toBe('1');
+    expect(result[1].id).toBe('3');
+  });
+
+  it('should return only "Selesai" tasks when status is "Selesai"', () => {
+    const result = filterTasksByStatus(tasks, 'Selesai');
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('2');
   });
 });
