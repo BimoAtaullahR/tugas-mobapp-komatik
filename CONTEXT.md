@@ -18,3 +18,6 @@ Prioritas pengerjaan fitur tambahan adalah **Hapus Tugas** dan **Filter Status (
 
 ### Styling Approach
 Menggunakan **Vanilla `StyleSheet`** bawaan React Native. Hal ini untuk memastikan demonstrasi pemahaman fundamental terhadap Flexbox dan layout dasar berjalan lancar saat presentasi, tanpa bergantung pada library pihak ketiga.
+
+### Testing Strategy
+Hanya menulis Unit Test untuk *Deep Modules* (Logika Bisnis) menggunakan Jest. Fokus pengujian hanya pada `validationUtils.js` dan `taskUtils.js` untuk memastikan fungsionalitas murni berjalan dengan baik, tanpa melibatkan pengujian komponen UI.

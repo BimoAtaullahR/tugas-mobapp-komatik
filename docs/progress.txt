@@ -1,0 +1,9 @@
+This file tracks the iteration progress of the AI agent.
+It is used to ensure the agent maintains context between iterations.
+
+## Instructions for the Agent:
+1. DO NOT DELETE the contents of this file in any iteration.
+2. ALWAYS APPEND your latest progress at the very bottom.
+3. Use a concise and dense format: 
+   `[Date/Time] - [Issue ID] - [Action completed] - [Blocker/Architecture Decision]`
+4. Prioritize technical honesty. If a test or edge case was bypassed, note the reason.
