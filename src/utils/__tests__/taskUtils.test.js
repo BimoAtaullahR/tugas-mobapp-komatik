@@ -1,4 +1,4 @@
-const { addTask, toggleTaskStatus } = require('../taskUtils');
+const { addTask, toggleTaskStatus, deleteTask } = require('../taskUtils');
 
 describe('taskUtils - addTask', () => {
   it('should add a new task to the array and return a new array', () => {
@@ -55,5 +55,31 @@ describe('taskUtils - toggleTaskStatus', () => {
     const result = toggleTaskStatus(tasks, '3'); // non-existent ID
     
     expect(result).toEqual(tasks);
+  });
+});
+
+describe('taskUtils - deleteTask', () => {
+  it('should remove the task with the given ID from the array', () => {
+    const tasks = [
+      { id: '1', title: 'Task 1' },
+      { id: '2', title: 'Task 2' }
+    ];
+    
+    const result = deleteTask(tasks, '1');
+    
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('2');
+    expect(tasks).toHaveLength(2); // pure function check
+  });
+
+  it('should return the same array content if ID is not found', () => {
+    const tasks = [
+      { id: '1', title: 'Task 1' }
+    ];
+    
+    const result = deleteTask(tasks, '3');
+    
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('1');
   });
 });

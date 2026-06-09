@@ -22,7 +22,12 @@ function toggleTaskStatus(tasks, taskId) {
   });
 }
 
+function deleteTask(tasks, taskId) {
+  return tasks.filter(task => task.id !== taskId);
+}
+
 module.exports = {
   addTask,
-  toggleTaskStatus
+  toggleTaskStatus,
+  deleteTask
 };

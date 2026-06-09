@@ -32,6 +32,12 @@ export default function DetailScreen({ route, navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
+        <Button 
+          title="Hapus Tugas" 
+          color="#dc3545" 
+          onPress={() => navigation.navigate('Home', { deletedTaskId: task.id })} 
+        />
+        <View style={{height: 10}} />
         <Button title="Kembali" onPress={() => navigation.goBack()} />
       </View>
     </ScrollView>

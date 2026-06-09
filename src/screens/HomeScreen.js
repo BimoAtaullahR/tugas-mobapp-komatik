@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import TaskCard from '../components/TaskCard';
-import { addTask, toggleTaskStatus } from '../utils/taskUtils';
+import { addTask, toggleTaskStatus, deleteTask } from '../utils/taskUtils';
 
 export default function HomeScreen({ route, navigation }) {
   const [tasks, setTasks] = useState([
@@ -28,6 +28,13 @@ export default function HomeScreen({ route, navigation }) {
       navigation.setParams({ newTask: undefined });
     }
   }, [route.params?.newTask]);
+
+  useEffect(() => {
+    if (route.params?.deletedTaskId) {
+      setTasks(currentTasks => deleteTask(currentTasks, route.params.deletedTaskId));
+      navigation.setParams({ deletedTaskId: undefined });
+    }
+  }, [route.params?.deletedTaskId]);
 
   return (
     <View style={styles.container}>
