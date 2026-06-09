@@ -36,16 +36,17 @@ export default function HomeScreen({ route, navigation }) {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
         ListEmptyComponent={<Text style={styles.emptyText}>Belum ada tugas</Text>}
-        renderItem={({ item }) => <TaskCard task={item} />}
+        renderItem={({ item }) => (
+          <TaskCard 
+            task={item} 
+            onPress={() => navigation.navigate('Detail', { task: item })} 
+          />
+        )}
       />
       <View style={styles.buttonContainer}>
         <Button 
           title="Tambah Tugas" 
           onPress={() => navigation.navigate('Form')} 
-        />
-        <Button 
-          title="Detail Tugas (Dummy)" 
-          onPress={() => navigation.navigate('Detail')} 
         />
       </View>
     </View>
