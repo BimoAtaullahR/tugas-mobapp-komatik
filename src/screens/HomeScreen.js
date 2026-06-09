@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import TaskCard from '../components/TaskCard';
-import { addTask } from '../utils/taskUtils';
+import { addTask, toggleTaskStatus } from '../utils/taskUtils';
 
 export default function HomeScreen({ route, navigation }) {
   const [tasks, setTasks] = useState([
@@ -40,6 +40,7 @@ export default function HomeScreen({ route, navigation }) {
           <TaskCard 
             task={item} 
             onPress={() => navigation.navigate('Detail', { task: item })} 
+            onToggleStatus={() => setTasks(currentTasks => toggleTaskStatus(currentTasks, item.id))}
           />
         )}
       />

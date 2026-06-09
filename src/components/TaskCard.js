@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function TaskCard({ task, onPress }) {
+export default function TaskCard({ task, onPress, onToggleStatus }) {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.header}>
         <Text style={styles.title}>{task.title}</Text>
-        <View style={[styles.statusBadge, task.status === 'Selesai' ? styles.statusSelesai : styles.statusBelum]}>
+        <TouchableOpacity 
+          style={[styles.statusBadge, task.status === 'Selesai' ? styles.statusSelesai : styles.statusBelum]}
+          onPress={onToggleStatus}
+        >
           <Text style={styles.statusText}>{task.status}</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <Text style={styles.category}>{task.category}</Text>
       <Text style={styles.description} numberOfLines={2}>
